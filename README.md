@@ -62,7 +62,8 @@ sns.countplot(data=df, x="Survived")
 plt.title("Survival Count")
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/526d8323-0acd-437b-8025-f2844775bcfe)
+![image](https://github.com/user-attachments/assets/20d70188-0f3c-445e-96a6-c3e8e26d3c07)
+
 ```
 df["Pclass"].unique()
 ```
@@ -75,7 +76,8 @@ sns.catplot(x='Survived', hue='Gender', data=df, kind='count')
 plt.title("Survival by Gender")
 plt.show()
 ```
-![image](https://github.com/user-attachments/assets/c2a56678-f555-4f1e-a735-800032641e0a)
+![image](https://github.com/user-attachments/assets/b72c7bb0-b9c4-49f8-9575-4fc943ad2b43)
+
 ```
 sns.boxplot(x="Survived", y="Age", data=df)
 plt.title("Age Distribution by Survival")
