@@ -1,6 +1,7 @@
 # EXNO2DS
+
 # AIM:
-      To perform Exploratory Data Analysis on the given data set.
+ To perform Exploratory Data Analysis on the given data set.
       
 # EXPLANATION:
   The primary aim with exploratory analysis is to examine the data for distribution, outliers and anomalies to direct specific testing of your hypothesis.
@@ -23,7 +24,94 @@ STEP 7: Use cross tabulation method to quantitatively analyze the relationship b
 STEP 8: Use heatmap method of representation to show relationships between two variables, one plotted on each axis.
 
 ## CODING AND OUTPUT
-        <<INCLUDE YOUR CODING AND OUTPUT SCREENSHOTS>>
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("/content/titanic_dataset.csv")  # Replace with actual path
+
+# Display basic info
+df.info()
+
+# Display first few rows
+df.head()
+
+# Check shape
+print(f"Dataset contains {df.shape[0]} rows and {df.shape[1]} columns")
+```
+```
+# Set PassengerId as index
+df.set_index("PassengerId", inplace=True)
+
+# Summary statistics
+df.describe()
+```
+![image](https://github.com/user-attachments/assets/4679d9d0-f489-4495-80b7-dccda7589f48)
+```
+# Count unique values in categorical columns
+categorical_columns = ["Survived", "Pclass", "Sex", "Embarked"]
+for col in categorical_columns:
+    print(f"{col} unique values:\n", df[col].value_counts(), "\n")
+```
+![image](https://github.com/user-attachments/assets/60cec805-ff91-493c-84e1-faff11f8958f)
+```
+sns.countplot(data=df, x="Survived")
+plt.title("Survival Count")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/526d8323-0acd-437b-8025-f2844775bcfe)
+```
+df["Pclass"].unique()
+```
+![image](https://github.com/user-attachments/assets/310ecb77-d9d9-45a2-a711-79d93a2d74c8)
+```
+df.rename(columns={"Sex": "Gender"}, inplace=True)
+```
+```
+sns.catplot(x='Survived', hue='Gender', data=df, kind='count')
+plt.title("Survival by Gender")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/c2a56678-f555-4f1e-a735-800032641e0a)
+```
+sns.boxplot(x="Survived", y="Age", data=df)
+plt.title("Age Distribution by Survival")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/c9105756-42d4-4731-922d-2ce52d11c917)
+```
+sns.boxplot(x="Pclass", y="Age", hue="Gender", data=df)
+plt.title("Age Distribution Across Passenger Classes and Gender")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/c2bdad4f-8176-48b0-9299-6ea54ac2fded)
+```
+sns.catplot(x="Pclass", y="Survived", hue="Gender", data=df, kind="bar")
+plt.title("Survival Rate by Passenger Class and Gender")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/d70f0dd0-ee49-43de-b04b-45ac906e5996)
+```
+plt.figure(figsize=(10,6))
+
+# Select only numerical columns
+numerical_df = df.select_dtypes(include=["number"])
+
+# Compute correlation and plot heatmap
+sns.heatmap(numerical_df.corr(), annot=True, cmap="coolwarm", fmt=".2f")
+plt.title("Feature Correlation Heatmap")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/5c89b201-7d12-40d9-b726-99e4d32ed2f1)
+```
+sns.pairplot(df, hue="Survived", diag_kind="kde")
+plt.show()
+```
+![image](https://github.com/user-attachments/assets/0f559cd0-e117-46e5-b78d-ac99472894e8)
 
 # RESULT
-        <<INCLUDE YOUR RESULT HERE>>
+Thus, the Exploratory Data Analysis on the given data set was performed successfully.
+        
